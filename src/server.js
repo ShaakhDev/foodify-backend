@@ -1,11 +1,13 @@
 import express from "express";
 import Routes from "./api/routes/index.js";
 import dotenv from "dotenv";
+import { Client } from "@googlemaps/google-maps-services-js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+export const client = new Client({});
 
 async function server() {
 	try {
