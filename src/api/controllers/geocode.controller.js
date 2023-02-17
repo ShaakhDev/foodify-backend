@@ -8,7 +8,7 @@ export default class GeocodeController {
 			const locationMock = locations[city.toLowerCase()];
 			return res.status(200).json(locationMock);
 		}
-		console.log(process.env.GOOGLE_CLOUD_API_KEY);
+
 		client
 			.geocode({
 				params: {
