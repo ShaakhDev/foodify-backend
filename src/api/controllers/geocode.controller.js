@@ -1,7 +1,7 @@
-import { locations } from "../../mocks/geocode/geocode.mock.js";
-import { client } from "../../../index.js";
+const { locations } = require("../../mocks/geocode/geocode.mock.js");
+const { client } = require("../../../index.js");
 
-export default class GeocodeController {
+ class GeocodeController {
 	static async getGeocode(req, res) {
 		const { city, mock } = req.query;
 		if (mock === "true") {
@@ -25,3 +25,5 @@ export default class GeocodeController {
 			});
 	}
 }
+
+module.exports = GeocodeController;

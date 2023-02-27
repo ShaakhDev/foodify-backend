@@ -1,9 +1,9 @@
-import antwerp from "./antwerp.js";
-import chicago from "./chicago.js";
-import toronto from "./toronto.js";
-import san_francisco from "./san_francisco.js";
+const antwerp =  require("./antwerp.js");
+const chicago =  require("./chicago.js");
+const toronto =  require("./toronto.js");
+const san_francisco =  require("./san_francisco.js");
 
-export const mocks = {
+exports.mocks = {
 	"51.219448,4.402464": antwerp,
 	"43.653225,-79.383186": toronto,
 	"41.878113,-87.629799": chicago,
@@ -20,7 +20,7 @@ const mockImages = [
 	"https://www.foodiesfeed.com/wp-content/uploads/2019/02/pizza-ready-for-baking-600x400.jpg",
 ];
 
-export const addMockImage = restaurant => {
+exports.addMockImage = restaurant => {
 	const mockImage =
 		mockImages[Math.ceil(Math.random() * (mockImages.length - 1))];
 	restaurant.photos = [mockImage];

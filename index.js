@@ -6,7 +6,8 @@ const Routes = require("./src/api/routes/index.js");
 const dotenv = require("dotenv");
 // import { Client } from "@googlemaps/google-maps-services-js";
 const { Client } = require("@googlemaps/google-maps-services-js");
-
+const GeocodeController = require("./src/api/controllers/geocode.controller.js");
+const PlacesNearbyController = require("./src/api/controllers/places-nearby.controller.js");
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -14,14 +15,18 @@ const client = new Client({});
 
 // async function server() {
 // 	try {
-app.get("/", (req, res) => {
-	res.send("Express on Vercel");
-});
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-Routes(app);
+app.get("/", (req, res) => {
+	res.send("Express on Vercel");
+});
+
+app.get("/api/geocode", GeocodeController.getGeocode);
+
+app.get("/api/placesNearby", PlacesNearbyController.getPlacesNearby);
+app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+
 // 	} catch (err) {
 // 		console.log(err);
 // 	}

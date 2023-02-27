@@ -1,5 +1,5 @@
-import { mocks, addMockImage } from "../../mocks/places/mock/index.js";
-import { client } from "../../../index.js";
+const { mocks, addMockImage } = require("../../mocks/places/mock/index.js");
+const { client } = require("../../../index.js");
 
 const addGoogleImage = restaurant => {
 	const ref = restaurant.photos && restaurant.photos[0].photo_reference;
@@ -16,7 +16,7 @@ const addGoogleImage = restaurant => {
 	return restaurant;
 };
 
-export default class PlacesNearbyController {
+class PlacesNearbyController {
 	static async getPlacesNearby(req, res) {
 		const { location, mock } = req.query;
 		// const placesNearby = await PlacesNearbyService.getPlacesNearby(location);
@@ -45,3 +45,5 @@ export default class PlacesNearbyController {
 			.catch(e => res.status(400).json(e.resonse.data.error_message));
 	}
 }
+
+module.exports = PlacesNearbyController;

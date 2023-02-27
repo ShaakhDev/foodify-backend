@@ -1,4 +1,4 @@
-export const locations = {
+const locations = {
 	antwerp: {
 		results: [
 			{
@@ -80,3 +80,5 @@ export const locations = {
 		],
 	},
 };
+
+exports.locations = locations;
