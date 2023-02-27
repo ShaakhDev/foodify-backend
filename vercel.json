@@ -8,7 +8,11 @@
     ],
     "routes": [
         {
-            "src": "/(.*)",
+            "src": "/api/geocode",
+            "dest": "index.js"
+        },
+        {
+            "src": "/api/placesNearby",
             "dest": "index.js"
         }
     ]
