@@ -14,13 +14,14 @@ export const client = new Client({});
 
 // async function server() {
 // 	try {
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
 	res.send("Express on Vercel");
 });
-await Routes(app);
+app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+// await Routes(app);
 // 	} catch (err) {
 // 		console.log(err);
 // 	}
