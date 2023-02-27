@@ -1,5 +1,5 @@
 import express from "express";
-import Routes from "./api/routes/index.js";
+import Routes from "./src/api/routes/index.js";
 import dotenv from "dotenv";
 import { Client } from "@googlemaps/google-maps-services-js";
 

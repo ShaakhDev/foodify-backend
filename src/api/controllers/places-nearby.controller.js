@@ -1,5 +1,5 @@
 import { mocks, addMockImage } from "../../mocks/places/mock/index.js";
-import { client } from "../../server.js";
+import { client } from "../../../index.js";
 
 const addGoogleImage = restaurant => {
 	const ref = restaurant.photos && restaurant.photos[0].photo_reference;

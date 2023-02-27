@@ -1,5 +1,5 @@
 import { locations } from "../../mocks/geocode/geocode.mock.js";
-import { client } from "../../server.js";
+import { client } from "../../../index.js";
 
 export default class GeocodeController {
 	static async getGeocode(req, res) {
