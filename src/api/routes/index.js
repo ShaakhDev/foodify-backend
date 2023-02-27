@@ -1,9 +1,11 @@
-import Path from "path";
-import fs from "fs";
+// import Path from "path";
+const Path = require("path");
+// import fs from "fs";
+const fs = require("fs");
 
 const homeDir = Path.resolve();
 
-export default function (app) {
+modules.exports = function (app) {
 	return new Promise((resolve, reject) => {
 		const routeDirectory = Path.join(homeDir, "src", "api", "routes");
 		fs.readdir(routeDirectory, async (err, files) => {
@@ -20,4 +22,4 @@ export default function (app) {
 			resolve(200);
 		});
 	});
-}
+};
