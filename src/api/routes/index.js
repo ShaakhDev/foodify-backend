@@ -5,7 +5,7 @@ const fs = require("fs");
 
 const homeDir = Path.resolve();
 
-modules.exports = function (app) {
+async function routes(app) {
 	return new Promise((resolve, reject) => {
 		const routeDirectory = Path.join(homeDir, "src", "api", "routes");
 		fs.readdir(routeDirectory, async (err, files) => {
@@ -22,4 +22,6 @@ modules.exports = function (app) {
 			resolve(200);
 		});
 	});
-};
+}
+
+export default await routes;

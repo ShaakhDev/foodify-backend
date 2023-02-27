@@ -21,7 +21,7 @@ app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-await Routes(app);
+Routes(app);
 // 	} catch (err) {
 // 		console.log(err);
 // 	}
