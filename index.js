@@ -12,20 +12,18 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 export const client = new Client({});
 
-async function server() {
-	try {
-		app.listen(PORT, () =>
-			console.log(`Example app listening on port ${PORT}!`)
-		);
-		app.use(express.json());
-		app.use(express.urlencoded({ extended: true }));
-		app.get("/", (req, res) => {
-			res.send("Express on Vercel");
-		});
-		await Routes(app);
-	} catch (err) {
-		console.log(err);
-	}
-}
+// async function server() {
+// 	try {
+app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.get("/", (req, res) => {
+	res.send("Express on Vercel");
+});
+await Routes(app);
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// }
 
-module.export = server();
+module.export = app;
