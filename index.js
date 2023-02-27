@@ -19,7 +19,9 @@ async function server() {
 		);
 		app.use(express.json());
 		app.use(express.urlencoded({ extended: true }));
-
+		app.get("/", (req, res) => {
+			res.send("Express on Vercel");
+		});
 		await Routes(app);
 	} catch (err) {
 		console.log(err);
