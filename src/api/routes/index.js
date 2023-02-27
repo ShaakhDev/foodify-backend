@@ -5,7 +5,7 @@ const fs = require("fs");
 
 const homeDir = Path.resolve();
 
-modules.exports = function (app) {
+module.export = function (app) {
 	return new Promise(function (resolve, reject) {
 		const routeDirectory = Path.join(homeDir, "src", "api", "routes");
 		fs.readdir(routeDirectory, async (err, files) => {
