@@ -1,7 +1,11 @@
-import express from "express";
-import Routes from "./src/api/routes/index.js";
-import dotenv from "dotenv";
-import { Client } from "@googlemaps/google-maps-services-js";
+// import express from "express";
+const express = require("express");
+// import Routes from "./src/api/routes/index.js";
+const Routes = require("./src/api/routes/index.js");
+// import dotenv from "dotenv";
+const dotenv = require("dotenv");
+// import { Client } from "@googlemaps/google-maps-services-js";
+const { Client } = require("@googlemaps/google-maps-services-js");
 
 dotenv.config();
 const app = express();
@@ -22,4 +26,4 @@ async function server() {
 	}
 }
 
-server().then();
+module.export = server();
