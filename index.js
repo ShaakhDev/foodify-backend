@@ -18,10 +18,10 @@ app.get("/", (req, res) => {
 	res.send("Express on Vercel");
 });
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// await Routes(app);
+await Routes(app);
 // 	} catch (err) {
 // 		console.log(err);
 // 	}
