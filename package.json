@@ -1,14 +1,14 @@
 {
   "name": "foodify-backend",
   "version": "1.0.0",
-  "main": "./src/server.js",
+  "main": "index.js",
   "type": "module",
   "author": "Shakhzod Bobolov (ShaakhDev)",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./src/server.js",
-    "start": "node ./src/server.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.3.16",
