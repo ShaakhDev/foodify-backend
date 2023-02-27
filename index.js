@@ -10,7 +10,7 @@ const { Client } = require("@googlemaps/google-maps-services-js");
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
-export const client = new Client({});
+const client = new Client({});
 
 // async function server() {
 // 	try {
@@ -27,4 +27,4 @@ await Routes(app);
 // 	}
 // }
 
-module.export = app;
+module.exports = { app, client };
