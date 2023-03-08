@@ -22,7 +22,11 @@ app.get("/", (req, res) => {
 	res.send("Express on Vercel");
 });
 
-app.get("/api/geocode", GeocodeController.getGeocode);
+// app.get("/api/geocode", GeocodeController.getGeocode);
+app.get("/api/geocode", (req, res) => {
+	console.log(req.query);
+	res.send("Hello");
+});
 
 app.get("/api/placesNearby", PlacesNearbyController.getPlacesNearby);
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
