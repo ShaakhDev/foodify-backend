@@ -1,20 +1,17 @@
-// import express from "express";
 const express = require("express");
-// import Routes from "./src/api/routes/index.js";
-const Routes = require("./src/api/routes/index.js");
-// import dotenv from "dotenv";
-const dotenv = require("dotenv");
-// import { Client } from "@googlemaps/google-maps-services-js";
+const { locations } = require("./src/mocks/geocode/geocode.mock.js");
+const { mocks, addMockImage } = require("./src/mocks/places/mock/index.js");
+const {
+	addGoogleImage,
+} = require("./src/api/controllers/places-nearby.controller.js");
 const { Client } = require("@googlemaps/google-maps-services-js");
-const GeocodeController = require("./src/api/controllers/geocode.controller.js");
-const PlacesNearbyController = require("./src/api/controllers/places-nearby.controller.js");
+const dotenv = require("dotenv");
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 const client = new Client({});
 
-// async function server() {
-// 	try {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -22,18 +19,57 @@ app.get("/", (req, res) => {
 	res.send("Express on Vercel");
 });
 
-// app.get("/api/geocode", GeocodeController.getGeocode);
 app.get("/api/geocode", (req, res) => {
-	console.log(req.query);
-	res.send("Hello");
+	const { city, mock } = req.query;
+	if (mock === "true") {
+		const locationMock = locations[city.toLowerCase()];
+		return res.status(200).json(locationMock);
+	}
+
+	client
+		.geocode({
+			params: {
+				address: city,
+				key: process.env.GOOGLE_CLOUD_API_KEY,
+			},
+			timeout: 1000, // milliseconds
+		})
+		.then(result => {
+			return res.status(200).json(result.data);
+		})
+		.catch(e => {
+			return res.status(400).json(e.response.data.error_message);
+		});
 });
 
-app.get("/api/placesNearby", PlacesNearbyController.getPlacesNearby);
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+app.get("/api/placesNearby", (req, res) => {
+	const { location, mock } = req.query;
 
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// }
+	if (mock === "true") {
+		const data = mocks[location];
+		if (data) {
+			data.results = data.results.map(addMockImage);
+		}
+		return res.status(200).json(data);
+	}
+
+	client
+		.placesNearby({
+			params: {
+				location,
+				radius: 1500,
+				type: "restaurant",
+				key: process.env.GOOGLE_CLOUD_API_KEY,
+			},
+			timeout: 1000, // milliseconds
+		})
+		.then(result => {
+			result.data.results = result.data.results.map(addGoogleImage);
+			return res.status(200).json(result.data);
+		})
+		.catch(e => res.status(400).json(e.resonse.data.error_message));
+});
+
+app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 
 module.exports = { app, client };

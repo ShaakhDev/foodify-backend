@@ -1,7 +1,7 @@
 const { mocks, addMockImage } = require("../../mocks/places/mock/index.js");
 const { client } = require("../../../index.js");
 
-const addGoogleImage = restaurant => {
+export const addGoogleImage = restaurant => {
 	const ref = restaurant.photos && restaurant.photos[0].photo_reference;
 	if (!ref) {
 		restaurant.photos = [
