@@ -64,7 +64,9 @@ app.get("/api/placesNearby", (req, res) => {
 			timeout: 1000, // milliseconds
 		})
 		.then(result => {
+			console.log("result");
 			result.data.results = result.data.results.map(addGoogleImage);
+			console.log("result mutated");
 			return res.status(200).json(result.data);
 		})
 		.catch(e => res.status(400).json(e.resonse.data.error_message));
