@@ -65,11 +65,12 @@ app.get("/api/placesNearby", (req, res) => {
 		})
 		.then(result => {
 			console.log("result", result);
-			result.data.results = result.data.results.map(addGoogleImage);
+
+			// result.data.results = result.data.results.map(addGoogleImage);
 			console.log("result mutated");
 			return res.status(200).json(result.data);
 		})
-		.catch(e => res.status(400).json(e.resonse.data.error_message));
+		.catch(e => res.status(400).json(e.response.data.error_message));
 });
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
