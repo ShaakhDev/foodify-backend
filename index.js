@@ -43,7 +43,7 @@ app.get("/api/geocode", (req, res) => {
 });
 
 app.get("/api/placesNearby", (req, res) => {
-	const { location, mock,placeType } = req.query;
+	const { location, mock, placeType } = req.query;
 
 	if (mock === "true") {
 		const data = mocks[location];
@@ -64,10 +64,9 @@ app.get("/api/placesNearby", (req, res) => {
 			timeout: 1000, // milliseconds
 		})
 		.then(result => {
-			console.log("result", result);
+			let data = result.data.results.map(addGoogleImage);
+			result.data.results = data;
 
-			result?.data?.results = result?.data?.results.map(addGoogleImage);
-			console.log("result mutated");
 			return res.status(200).json(result?.data);
 		})
 		.catch(e => res.status(400).json(e.response.data.error_message));
@@ -75,4 +74,4 @@ app.get("/api/placesNearby", (req, res) => {
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 
-module.exports = { app, client };
+module.exports = { app };

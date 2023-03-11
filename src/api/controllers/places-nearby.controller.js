@@ -1,7 +1,7 @@
 const { mocks, addMockImage } = require("../../mocks/places/mock/index.js");
 const { client } = require("../../../index.js");
 
-export const addGoogleImage = restaurant => {
+const addGoogleImage = restaurant => {
 	const ref = restaurant.photos && restaurant.photos[0].photo_reference;
 	if (!ref) {
 		restaurant.photos = [
@@ -46,4 +46,4 @@ class PlacesNearbyController {
 	}
 }
 
-module.exports = PlacesNearbyController;
+module.exports = { PlacesNearbyController, addGoogleImage };
