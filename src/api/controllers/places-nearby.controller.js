@@ -19,7 +19,7 @@ const addGoogleImage = restaurant => {
 class PlacesNearbyController {
 	static async getPlacesNearby(req, res) {
 		const { location, mock } = req.query;
-		// const placesNearby = await PlacesNearbyService.getPlacesNearby(location);
+
 		if (mock === "true") {
 			const data = mocks[location];
 			if (data) {
