@@ -42,35 +42,35 @@ app.get("/api/geocode", (req, res) => {
 		});
 });
 
-// app.get("/api/placesNearby", (req, res) => {
-// 	const { location, mock, placeType } = req.query;
+app.get("/api/placesNearby", (req, res) => {
+	const { location, mock, placeType = "restaurant" } = req.query;
 
-// 	if (mock === "true") {
-// 		const data = mocks[location];
-// 		if (data) {
-// 			data.results = data.results.map(addMockImage);
-// 		}
-// 		return res.status(200).json(data);
-// 	}
+	if (mock === "true") {
+		const data = mocks[location];
+		if (data) {
+			data.results = data.results.map(addMockImage);
+		}
+		return res.status(200).json(data);
+	}
 
-// 	client
-// 		.placesNearby({
-// 			params: {
-// 				location,
-// 				radius: 1500,
-// 				type: placeType || "restaurant",
-// 				key: process.env.GOOGLE_CLOUD_API_KEY,
-// 			},
-// 			timeout: 1000, // milliseconds
-// 		})
-// 		.then(result => {
-// 			let data = result.data.results.map(addGoogleImage);
-// 			result.data.results = data;
+	client
+		.placesNearby({
+			params: {
+				location,
+				radius: 1500,
+				type: placeType,
+				key: process.env.GOOGLE_CLOUD_API_KEY,
+			},
+			timeout: 1000, // milliseconds
+		})
+		.then(result => {
+			let data = result.data.results.map(addGoogleImage);
+			result.data.results = data;
 
-// 			return res.status(200).json(result?.data);
-// 		})
-// 		.catch(e => res.status(400).json(e.response.data.error_message));
-// });
+			return res.status(200).json(result.data);
+		})
+		.catch(e => res.status(400).json(e.response.data.error_message));
+});
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 
