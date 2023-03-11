@@ -19,28 +19,28 @@ app.get("/", (req, res) => {
 	res.send("Express on Vercel");
 });
 
-// app.get("/api/geocode", (req, res) => {
-// 	const { city, mock } = req.query;
-// 	if (mock === "true") {
-// 		const locationMock = locations[city.toLowerCase()];
-// 		return res.status(200).json(locationMock);
-// 	}
+app.get("/api/geocode", (req, res) => {
+	const { city, mock } = req.query;
+	if (mock === "true") {
+		const locationMock = locations[city.toLowerCase()];
+		return res.status(200).json(locationMock);
+	}
 
-// 	client
-// 		.geocode({
-// 			params: {
-// 				address: city,
-// 				key: process.env.GOOGLE_CLOUD_API_KEY,
-// 			},
-// 			timeout: 1000, // milliseconds
-// 		})
-// 		.then(result => {
-// 			return res.status(200).json(result.data);
-// 		})
-// 		.catch(e => {
-// 			return res.status(400).json(e.response.data.error_message);
-// 		});
-// });
+	client
+		.geocode({
+			params: {
+				address: city,
+				key: process.env.GOOGLE_CLOUD_API_KEY,
+			},
+			timeout: 1000, // milliseconds
+		})
+		.then(result => {
+			return res.status(200).json(result.data);
+		})
+		.catch(e => {
+			return res.status(400).json(e.response.data.error_message);
+		});
+});
 
 // app.get("/api/placesNearby", (req, res) => {
 // 	const { location, mock, placeType } = req.query;
