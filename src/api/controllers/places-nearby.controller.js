@@ -46,4 +46,4 @@ class PlacesNearbyController {
 	}
 }
 
-module.exports = { PlacesNearbyController, addGoogleImage };
+module.exports = { addGoogleImage };
