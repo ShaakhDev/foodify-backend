@@ -63,10 +63,10 @@ app.get("/api/placesNearby", (req, res) => {
 			},
 			timeout: 1000, // milliseconds
 		})
-		.then(async result => {
+		.then(result => {
 			console.log("result", result);
-			let data = await result?.data?.results
-			result?.data?.results = data.map(addGoogleImage);
+
+			// result?.data?.results = result?.data?.results.map(addGoogleImage);
 			console.log("result mutated");
 			return res.status(200).json(result?.data);
 		})
