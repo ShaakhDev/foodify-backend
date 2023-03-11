@@ -63,12 +63,12 @@ app.get("/api/placesNearby", (req, res) => {
 			},
 			timeout: 1000, // milliseconds
 		})
-		.then(result => {
+		.then(async result => {
 			console.log("result", result);
-
-			result?.data?.results = result?.data?.results.map(addGoogleImage);
+			let data = await result?.data?.results
+			result?.data?.results = data.map(addGoogleImage);
 			console.log("result mutated");
-			return res.status(200).json(result.data);
+			return res.status(200).json(result?.data);
 		})
 		.catch(e => res.status(400).json(e.response.data.error_message));
 });
