@@ -43,7 +43,7 @@ app.get("/api/geocode", (req, res) => {
 });
 
 app.get("/api/placesNearby", (req, res) => {
-	const { location, mock } = req.query;
+	const { location, mock,placeType } = req.query;
 
 	if (mock === "true") {
 		const data = mocks[location];
@@ -58,7 +58,7 @@ app.get("/api/placesNearby", (req, res) => {
 			params: {
 				location,
 				radius: 1500,
-				type: "restaurant",
+				type: placeType || "restaurant",
 				key: process.env.GOOGLE_CLOUD_API_KEY,
 			},
 			timeout: 1000, // milliseconds
@@ -66,7 +66,7 @@ app.get("/api/placesNearby", (req, res) => {
 		.then(result => {
 			console.log("result", result);
 
-			// result?.data?.results = result?.data?.results.map(addGoogleImage);
+			result?.data?.results = result?.data?.results.map(addGoogleImage);
 			console.log("result mutated");
 			return res.status(200).json(result?.data);
 		})
