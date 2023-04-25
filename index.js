@@ -10,7 +10,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
-const client = new Client({});
+const stripeclient = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const googleClient = new Client({});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,7 +27,7 @@ app.get("/api/geocode", (req, res) => {
 		return res.status(200).json(locationMock);
 	}
 
-	client
+	googleClient
 		.geocode({
 			params: {
 				address: city,
@@ -53,7 +54,7 @@ app.get("/api/placesNearby", (req, res) => {
 		return res.status(200).json(data);
 	}
 
-	client
+	googleClient
 		.placesNearby({
 			params: {
 				location,
@@ -71,6 +72,10 @@ app.get("/api/placesNearby", (req, res) => {
 		})
 		.catch(e => res.status(400).json(e.response.data.error_message));
 });
+
+app.post("/api/pay",(req,res)=>{
+	res.send("Payment Successful")
+})
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 
