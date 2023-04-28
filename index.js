@@ -73,9 +73,10 @@ app.get("/api/placesNearby", (req, res) => {
 		.catch(e => res.status(400).json(e.response.data.error_message));
 });
 
-app.post("/api/pay",(req,res)=>{
-	res.json({message:"Payment Successful",success:true,data:req.body})
-})
+app.post("/api/pay", (req, res) => {
+	const body = JSON.parse(req.body);
+	res.json({ message: "Payment Successful", success: true, data: body });
+});
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 
