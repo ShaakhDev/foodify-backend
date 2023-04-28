@@ -94,8 +94,7 @@ app.post("/api/pay", (req, res) => {
 		})
 		.catch(e => {
 			console.log(e);
-			res.status(400);
-			res.json("Payment Failed", e);
+			res.status(400).json("Payment Failed", e);
 		});
 });
 
