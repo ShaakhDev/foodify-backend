@@ -80,7 +80,7 @@ app.post("/api/pay", (req, res) => {
 	stripeclient.paymentIntents
 		.create({
 			amount,
-			currency: "usd",
+			currency: "USD",
 			payment_method_types: ["card"],
 			payment_method_data: {
 				type: "card",
