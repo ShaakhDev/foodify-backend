@@ -6,6 +6,7 @@ const {
 } = require("./src/api/controllers/places-nearby.controller.js");
 const { Client } = require("@googlemaps/google-maps-services-js");
 const dotenv = require("dotenv");
+const { response } = require("express");
 
 dotenv.config();
 const app = express();
@@ -74,7 +75,28 @@ app.get("/api/placesNearby", (req, res) => {
 });
 
 app.post("/api/pay", (req, res) => {
-	res.json({ message: "Payment Successful", success: true, data: req.body });
+	const { token, amount } = req.body;
+	stripeclient.paymentIntents
+		.create({
+			amount,
+			currency: "usd",
+			payment_method_types: ["card"],
+			payment_method_data: {
+				type: "card",
+				card: {
+					token,
+				},
+			},
+			confirm: true,
+		})
+		.then(paymentIntent => {
+			res.json(paymentIntent);
+		})
+		.catch(e => {
+			console.log(e);
+			res.status(400);
+			res.json("Payment Failed", e);
+		});
 });
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
