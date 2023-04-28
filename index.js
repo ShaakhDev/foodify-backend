@@ -76,6 +76,7 @@ app.get("/api/placesNearby", (req, res) => {
 
 app.post("/api/pay", (req, res) => {
 	const { token, amount } = req.body;
+	console.log(process.env.STRIPE_SECRET_KEY);
 	stripeclient.paymentIntents
 		.create({
 			amount,
