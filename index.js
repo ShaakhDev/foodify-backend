@@ -1,12 +1,12 @@
 const express = require("express");
-const { locations } = require("./src/mocks/geocode/geocode.mock.js");
-const { mocks, addMockImage } = require("./src/mocks/places/mock/index.js");
+const {locations} = require("./src/mocks/geocode/geocode.mock.js");
+const {mocks, addMockImage} = require("./src/mocks/places/mock/index.js");
 const {
 	addGoogleImage,
 } = require("./src/api/controllers/places-nearby.controller.js");
-const { Client } = require("@googlemaps/google-maps-services-js");
+const {Client} = require("@googlemaps/google-maps-services-js");
 const dotenv = require("dotenv");
-const { response } = require("express");
+const {response} = require("express");
 
 dotenv.config();
 const app = express();
@@ -15,14 +15,14 @@ const stripeclient = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const googleClient = new Client({});
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 app.get("/", (req, res) => {
 	res.send("Express on Vercel");
 });
 
 app.get("/api/geocode", (req, res) => {
-	const { city, mock } = req.query;
+	const {city, mock} = req.query;
 	if (mock === "true") {
 		const locationMock = locations[city.toLowerCase()];
 		return res.status(200).json(locationMock);
@@ -45,7 +45,7 @@ app.get("/api/geocode", (req, res) => {
 });
 
 app.get("/api/placesNearby", (req, res) => {
-	const { location, mock, placeType = "restaurant" } = req.query;
+	const {location, mock, placeType = "restaurant"} = req.query;
 
 	if (mock === "true") {
 		const data = mocks[location];
@@ -75,7 +75,7 @@ app.get("/api/placesNearby", (req, res) => {
 });
 
 app.post("/api/pay", (req, res) => {
-	const { token, amount } = req.body;
+	const {token, amount} = req.body;
 	console.log(process.env.STRIPE_SECRET_KEY);
 	stripeclient.paymentIntents
 		.create({
@@ -98,7 +98,10 @@ app.post("/api/pay", (req, res) => {
 			res.status(400).json("Payment Failed", e);
 		});
 });
-
+app.get("/api/chinni", (req, res) => {
+	const isAllowed = process.env.IS_ALLOWED_TO_USE_CHINNI;
+	res.json({isAllowed});
+});
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 
-module.exports = { app };
+module.exports = {app};
