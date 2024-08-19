@@ -100,7 +100,8 @@ app.post("/api/pay", (req, res) => {
 });
 app.get("/api/chinni", (req, res) => {
 	const isAllowed = process.env.IS_ALLOWED_TO_USE_CHINNI;
-	res.json({isAllowed});
+	console.log(isAllowed);
+	res.status(200).json({isAllowed});
 });
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 
